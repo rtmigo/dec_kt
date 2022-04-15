@@ -7,13 +7,14 @@ plugins {
 }
 
 group = "io.github.rtmigo"
-version = "0.0.10+3"
+version = "0.0.0+1"
 
 tasks.register("pkgver") {
     doLast {
         println(project.version.toString())
     }
 }
+
 
 repositories {
     mavenCentral()
