@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: MIT
  **/
 
-package com.github.rtmigo.dec
+package io.github.rtmigo.dec
 
 import io.kotest.matchers.shouldBe
 import kotlinx.serialization.*

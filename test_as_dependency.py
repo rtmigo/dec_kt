@@ -50,6 +50,7 @@ with TempProject(
     result = app.run(["gradle", "run", "-q"])
 
     print("returncode", result.returncode)
+
     print("stderr", "-"*80)
     print(result.stderr)
 
