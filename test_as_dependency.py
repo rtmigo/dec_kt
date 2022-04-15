@@ -38,6 +38,7 @@ with TempProject(
 
                 dependencies {
                     implementation("__MODULE__") __IMP_DETAILS__
+                    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.2")
                 }
             """.replace("__MODULE__", module).replace("__IMP_DETAILS__", imp_details),
 
