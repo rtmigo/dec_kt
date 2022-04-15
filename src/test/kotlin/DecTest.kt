@@ -6,14 +6,10 @@
 package io.github.rtmigo.dec
 
 import io.kotest.matchers.shouldBe
-import kotlinx.serialization.*
-import kotlinx.serialization.json.Json
 import org.junit.jupiter.api.*
 import org.junit.jupiter.api.Assertions.assertTrue
 import java.math.BigDecimal
-import kotlin.math.round
 import kotlin.random.Random
-import kotlin.system.measureTimeMillis
 
 
 internal class DecTest {
@@ -142,63 +138,6 @@ internal class DecTest {
         (Dec(BigDecimal("123")).toString()).shouldBe("123.0")
     }
 
-    @Test
-    fun serializeAsString() {
-        val src = Dec(3.141592653589793)
-        val json = Json.encodeToString(src)
-        json.shouldBe(""""3.141592653589793"""")
-        val decoded: Dec = Json.decodeFromString(json)
-        decoded.requireEquals(3.141592653589793)
-    }
-
-    @Test
-    fun serializePrecision() {
-        for (i in 1..10000) {
-            var r = Dec(Random.nextDouble(-1000000.0, 1000000.0))
-            while (r > Dec.ZERO) {
-                val json = Json.encodeToString(r)
-                val decoded: Dec = Json.decodeFromString(json)
-                decoded.requireEquals(r)
-                r /= Random.nextDouble(-10.0, 10.0)
-            }
-        }
-//        val src = Dec(3.141592653589793)
-//        val json = Json.encodeToString(src)
-//        json.shouldBe(""""3.141592653589793"""")
-//        val decoded: Dec = Json.decodeFromString(json)
-//        decoded.shouldBeEqual(3.141592653589793)
-    }
-
-    @Test
-    fun deserializeFromDouble() {
-        // число было ранее сериализировано как Double
-        val json = "123.45"
-        val decoded: Dec = Json.decodeFromString(json)
-        decoded.requireEquals(123.45)
-    }
-
-    @Test
-    fun deserializeFromInt() {
-        // число было сериализировано как Int
-        val json = "123"
-        val decoded: Dec = Json.decodeFromString(json)
-        decoded.requireEquals(123.0)
-    }
-
-    /*
-    @Test
-    fun deserializeFromDifferent() {
-        // число было сериализировано как Int
-
-        @Serializable
-        data class Sample(val a: Real, val b: Real, val c: Real)
-
-        val json = """{"a": "123.45", "b":5.67, "c":8}"""
-        val decoded: Sample = Json.decodeFromString(json)
-        decoded.a.shouldBeEqual(123.45)
-        decoded.b.shouldBeEqual(5.67)
-        decoded.c.shouldBeEqual(8)
-    }*/
 
     @Test
     fun multiPlusPrecise() {
@@ -209,7 +148,7 @@ internal class DecTest {
     }
 
     @Test
-    fun toRnum() {
+    fun toDec() {
         17.toDec().requireEquals(17.0)
         "17.000".toDec().requireEquals(17.0)
         17.0.toDec().requireEquals(17.0)
@@ -256,67 +195,10 @@ internal class DecTest {
         num.sqrt().requireAlmostEquals(num.pow(0.5))
     }
 
-    @Disabled
-    @Test
-    fun draftBench() {
-
-
-        for (attempt in 1..2) {
-            val N = 10000000L
-            measureTimeMillis {
-                var sum = 0.0
-                for (i in 1..N) {
-                    val inc = round2(i / 100.00)
-                    sum = round2(sum + inc)
-                }
-                //println(sum)
-            }
-                .let { println("double: $it") }
-
-            measureTimeMillis {
-                var sum = Dec("0.0")
-                //val addend = Real("0.0001")
-
-                val divisor = Dec("100")
-                //val fact = Real("0.01")
-                for (i in 1L..N) {
-                    val inc = Dec(i) / divisor
-                    sum = sum + inc
-                }
-                //println(sum)
-            }.let { println("real: $it") }
-
-
-            measureTimeMillis {
-                var sum = BigDecimal("0.00000000000000")
-                val fact = BigDecimal("0.01")
-                val divisor = BigDecimal("100")
-                for (i in 1L..N) {
-                    val inc = BigDecimal(i) / divisor
-                    sum = sum + inc
-                }
-                //println(sum)
-            }.let { println("bigdecimal: $it") }
-
-//            measureTimeMillis {
-//                var x = BigDecimal("0.0")
-//                val addend = BigDecimal("0.0001")
-//                for (i in 1..N)
-//                    x+=addend
-//                x
-//            }.let { println("bd: $it") }
-
-
-        }
-
-    }
 
     @Test
     fun sumOf() {
         listOf(Dec(1), Dec(2), Dec(3)).sumOf { it }.requireEquals(6)
         listOf<Dec>().sumOf { it }.requireEquals(0)
     }
-
 }
-
-inline fun round2(x: Double) = round(x * 100.0) / 100.00

@@ -6,17 +6,14 @@
 package io.github.rtmigo.dec
 
 import kotlinx.serialization.*
-import kotlinx.serialization.descriptors.*
-import kotlinx.serialization.encoding.*
-import kotlinx.serialization.json.*
 import java.math.*
 import kotlin.math.pow
 
-/** Wrapper for [BigDecimal] that keeps results of all operations in the same [MathContext]. */
+/** Wrapper for [BigDecimal]. */
 @Serializable
 @JvmInline
 value class Dec(
-    @Serializable(with = BigDecimalDecSerializer::class)
+    @Serializable(with = BdSerializer::class)
     val decimal: BigDecimal,
 ): Comparable<Dec> {
     companion object {
@@ -188,33 +185,6 @@ fun Dec.requireAlmostEquals(other: Int, tolerance: Double = DEFAULT_TOLERANCE) =
 fun Dec.requireAlmostEquals(other: Long, tolerance: Double = DEFAULT_TOLERANCE) =
     this.requireAlmostEquals(Dec(other), tolerance)
 
-
-internal object BigDecimalDecSerializer : KSerializer<BigDecimal> {
-    override fun deserialize(decoder: Decoder): BigDecimal =
-        if (decoder is JsonDecoder) {
-            // декодируем мы менее строго, чем кодируем:
-            // принимаем и строки, и double
-            val element = decoder.decodeJsonElement()
-            val primitive = element as JsonPrimitive
-            if (primitive.isString)
-                primitive.content.toBigDecimal()
-            else
-                primitive.double.toBigDecimal()
-        }
-        else {
-            // это гипотетически для двоичных форматов. Пока не тестируется
-            decoder.decodeString().toBigDecimal()
-        }
-
-    override fun serialize(encoder: Encoder, value: BigDecimal) {
-        //val d = value.toDouble()
-        //assert(d.toDec().equalsTo(value))
-        encoder.encodeString(value.toString())
-    }
-
-    override val descriptor: SerialDescriptor
-        get() = PrimitiveSerialDescriptor("BigDecimal", PrimitiveKind.STRING)
-}
 
 fun max(a: Dec, b: Dec): Dec = if (a > b) a else b
 fun min(a: Dec, b: Dec): Dec = if (a < b) a else b
