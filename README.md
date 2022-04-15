@@ -90,32 +90,33 @@ rounding can be much slower than just using `Dec`.
 import org.apache.commons.math3.util.Precision
 import io.github.rtmigo.dec.*
 
-fun slowest(): Double {
+fun slowest(n: Int): Double {
     var x: Double = 0.0
-    for (i in 1..1000) {
+    for (i in 1..n) {
         x += 0.01
         x = Precision.round(x, 2)  // slow!
     }
     return x
 }
 
-fun average(): Dec {
+fun average(n: Int): Double {
     var x = Dec("0.0")
-    for (i in 1..1000) {
+    for (i in 1..n) {
         x += Dec("0.01")  // faster than Precision.round 
     }
-    return x
+    return x.toDouble()
 }
 
-fun fastest(): Double {
+fun fastest(n: Int): Double {
     var x: Double = 0.0
-    for (i in 1..1000) {
+    for (i in 1..n) {
         x += 0.01
         // we can reuse x if we are satisfied with an inaccurate 
         // value in the next step 
     }
     // we also must be sure that the accumulated error 
-    // is much less than the rounding 
+    // is much less than the rounding. This can be tricky 
+    // because the size of the error depends on n
     return Precision.round(x, 2)
 }
 ```
