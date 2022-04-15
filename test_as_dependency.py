@@ -2,9 +2,9 @@ import sys
 
 from tempp import *
 
-module="io.github.rtmigo:repr"
+module="io.github.rtmigo:dec"
 
-url="https://github.com/rtmigo/repr_kt"
+url="https://github.com/rtmigo/dec_kt"
 
 code="""
     import io.github.rtmigo.dec.*
