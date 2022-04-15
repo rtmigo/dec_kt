@@ -22,7 +22,8 @@ with TempProject(
             "build.gradle.kts": """
                 plugins {
                     id("application")
-                    kotlin("jvm") version "1.6.10"
+                    kotlin("jvm") version "1.6.20"
+                    id("org.jetbrains.kotlin.plugin.serialization") version "1.6.20"
                 }
 
                 repositories { mavenCentral() }
