@@ -52,7 +52,7 @@ Kotlin standard library adds arithmetic operators to the `BigDecimal`, but
 the result of the calculations can be surprising.
 
 ```kotlin
-BigDecimal("125") / BigDecimal("100")      // = 1.0
+BigDecimal("125") / BigDecimal("100")      // = 1
 BigDecimal("125.0") / BigDecimal("100.0")  // = 1.2
 BigDecimal("125.00") / BigDecimal("100")   // = 1.25
 ```
@@ -73,7 +73,7 @@ basic numeric types.
 ```kotlin
 Dec("125") + 8  // = 133.0
 
-BigDecimal("125") + 8  // does not compile in Kotlin 1.6
+BigDecimal("125") + 8  // does not compile in Kotlin 
 ```
 
 ## Speed considerations
