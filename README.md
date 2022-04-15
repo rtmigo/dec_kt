@@ -25,7 +25,7 @@ in a different order, give different results.
  0.1 + 0.2  -  0.1 - 0.2   // = 2.7755575615628914e-17
 ```
 
-`Dec` copes with the same task more predictably.
+`Dec` behaves more predictably.
 
 ```kotlin
 Dec(0.1) + Dec(0.2)  // = 0.3
@@ -78,23 +78,47 @@ BigDecimal("125") + 8  // does not compile in Kotlin
 
 ## Speed considerations
 
-### Dec is much slower than Double
+### Dec is faster than rounding Double
 
-`BigDecimal` is much slower, than `Double`.
-
-And `Dec` (with high precision `BigDecimal`) is slower, than low precision `BigDecimal`.
-
-
-<details>
-
-Don't let
-[benchmarks](https://medium.com/@ezioamf/bigdecimal-is-also-faster-than-double-with-the-extra-rounding-834004cc7e2f)
-fool you. BigDecimal is only as fast when we compare rounding doubles to rounding BigDecimals,
-not keeping precision.
-
-</details>
+`Double` with its rounding artifacts is much faster than `Dec`. It's tempting 
+to use `Double` and round it up after every calculation. However, properly done 
+rounding can be much slower than just using `Dec`.
 
 
+
+```kotlin
+import org.apache.commons.math3.util.Precision
+import io.github.rtmigo.dec.*
+
+fun slowest(): Double {
+    var x: Double = 0.0
+    for (i in 1..1000) {
+        x += 0.01
+        x = Precision.round(x, 2)  // slow!
+    }
+    return x
+}
+
+fun average(): Dec {
+    var x = Dec("0.0")
+    for (i in 1..1000) {
+        x += Dec("0.01")  // faster than Precision.round 
+    }
+    return x
+}
+
+fun fastest(): Double {
+    var x: Double = 0.0
+    for (i in 1..1000) {
+        x += 0.01
+        // we can reuse x if we are satisfied with an inaccurate 
+        // value in the next step 
+    }
+    // we also must be sure that the accumulated error 
+    // is much less than the rounding 
+    return Precision.round(x, 2)
+}
+```
 
 ### Reusing is faster than creation
 
