@@ -65,7 +65,7 @@ Dec("125.0") / Dec("100.0")  // = 1.25
 Dec("125.00") / Dec("100")   // = 1.25 
 ```
 
-## Implicit Conversions
+## Implicit conversions
 
 When the left side of an expression is a `Dec` instance, the right side can have
 basic numeric types.
