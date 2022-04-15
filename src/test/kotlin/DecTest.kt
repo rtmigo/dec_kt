@@ -6,8 +6,6 @@
 package io.github.rtmigo.dec
 
 import io.kotest.matchers.shouldBe
-import kotlinx.serialization.*
-import kotlinx.serialization.json.Json
 import org.junit.jupiter.api.*
 import org.junit.jupiter.api.Assertions.assertTrue
 import java.math.BigDecimal
@@ -150,7 +148,7 @@ internal class DecTest {
     }
 
     @Test
-    fun toRnum() {
+    fun toDec() {
         17.toDec().requireEquals(17.0)
         "17.000".toDec().requireEquals(17.0)
         17.0.toDec().requireEquals(17.0)
