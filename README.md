@@ -6,8 +6,8 @@
 
 `Dec` is a Kotlin wrapper around the Java `BigDecimal`. With the `Dec`, you
 can perform calculations while remaining at a
-predictable [Decimal64 precision](https://en.wikipedia.org/wiki/Decimal64_floating-point_format)
-.
+predictable [Decimal64](https://en.wikipedia.org/wiki/Decimal64_floating-point_format) precision.
+
 
 ## Dec vs Double
 
