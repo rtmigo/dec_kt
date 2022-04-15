@@ -47,6 +47,10 @@ with TempProject(
 
     app.print_files()
     result = app.run(["gradle", "run", "-q"])
+
+    print("returncode", result.returncode)
+    print("stdout", result.stdout)
+
     assert result.returncode == 0
     assert result.stdout == "12.3\n", result.stdout
 
