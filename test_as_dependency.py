@@ -8,7 +8,14 @@ url="https://github.com/rtmigo/dec_kt"
 
 code="""
     import io.github.rtmigo.dec.*
-    fun main() = println(Dec(12.3))
+    import kotlinx.serialization.*
+    import kotlinx.serialization.json.Json
+
+    fun main() {
+        Json.encodeToString(Dec(5.23))
+
+        println(Dec(12.3))
+    }
 """
 
 try:
