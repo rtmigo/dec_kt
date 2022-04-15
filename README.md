@@ -6,8 +6,8 @@
 
 `Dec` is a Kotlin wrapper around the Java `BigDecimal`. With the `Dec`, you
 can perform calculations while remaining at a
-predictable [Decimal64 precision](https://en.wikipedia.org/wiki/Decimal64_floating-point_format)
-.
+predictable [Decimal64](https://en.wikipedia.org/wiki/Decimal64_floating-point_format) precision.
+
 
 ## Dec vs Double
 
@@ -151,4 +151,24 @@ that:
 
 ```kotlin
 100.0.toDecBin() - 0.1.toDecBin()  // = 99.90000000000001
+```
+
+# Install
+
+#### settings.gradle.kts
+
+```kotlin
+sourceControl {
+    gitRepository(java.net.URI("https://github.com/rtmigo/dec_kt.git")) {
+        producesModule("io.github.rtmigo:dec")
+    }
+}
+```
+
+#### build.gradle.kts
+
+```kotlin
+dependencies {
+    implementation("io.github.rtmigo:dec")
+}
 ```

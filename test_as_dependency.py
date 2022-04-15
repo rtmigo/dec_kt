@@ -8,7 +8,14 @@ url="https://github.com/rtmigo/dec_kt"
 
 code="""
     import io.github.rtmigo.dec.*
-    fun main() = println(Dec(12.3))
+    import kotlinx.serialization.*
+    import kotlinx.serialization.json.Json
+
+    fun main() {
+        Json.encodeToString(Dec(5.23))
+
+        println(Dec(12.3))
+    }
 """
 
 try:
@@ -31,6 +38,7 @@ with TempProject(
 
                 dependencies {
                     implementation("__MODULE__") __IMP_DETAILS__
+                    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.2")
                 }
             """.replace("__MODULE__", module).replace("__IMP_DETAILS__", imp_details),
 
