@@ -3,6 +3,7 @@ plugins {
     id("java-library")
     jacoco
     java
+    id("org.jetbrains.kotlin.plugin.serialization") version "1.6.20"
 }
 
 group = "io.github.rtmigo"
@@ -20,8 +21,13 @@ repositories {
 
 dependencies {
     implementation(kotlin("stdlib-jdk8"))
-    implementation(kotlin("reflect"))
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.2")
+
     testImplementation(kotlin("test"))
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.8.2")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.8.2")
+    testImplementation("io.kotest:kotest-assertions-core:5.2.2")
+
 }
 
 kotlin {
@@ -45,7 +51,7 @@ tasks.register("updateReadmeVersion") {
         // найдем что-то вроде "io.github.rtmigo:repr:0.0.1"
         // и поменяем на актуальную версию
         val readmeFile = project.rootDir.resolve("README.md")
-        val prefixToFind = "io.github.rtmigo:repr:"
+        val prefixToFind = "io.github.rtmigo:dec:"
         val regex = """(?<=${Regex.escape(prefixToFind)})[0-9\.+]+""".toRegex()
         val oldText = readmeFile.readText()
         val newText = regex.replace(oldText, project.version.toString())

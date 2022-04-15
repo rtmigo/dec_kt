@@ -7,8 +7,8 @@ module="io.github.rtmigo:repr"
 url="https://github.com/rtmigo/repr_kt"
 
 code="""
-    import io.github.rtmigo.repr.*
-    fun main() = println(listOf(1, 2, 3).toRepr())
+    import io.github.rtmigo.dec.*
+    fun main() = println(Dec(12.3))
 """
 
 try:
@@ -48,6 +48,6 @@ with TempProject(
     app.print_files()
     result = app.run(["gradle", "run", "-q"])
     assert result.returncode == 0
-    assert result.stdout == "listOf(1, 2, 3)\n", result.stdout
+    assert result.stdout == "12.3\n", result.stdout
 
 print("Everything is OK!")
