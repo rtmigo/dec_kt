@@ -50,7 +50,12 @@ with TempProject(
     result = app.run(["gradle", "run", "-q"])
 
     print("returncode", result.returncode)
-    print("stdout", result.stdout)
+    print("stderr", "-"*80)
+    print(result.stderr)
+
+    print("stdout", "-"*80)
+    print(result.stdout)
+    print("-"*80)
 
     assert result.returncode == 0
     assert result.stdout == "12.3\n", result.stdout
