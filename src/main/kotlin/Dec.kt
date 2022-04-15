@@ -80,14 +80,13 @@ value class Dec(
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
-    // Kotlin 1.6 не позволяет перегружать метод equals для value-классов
+    // Kotlin 1.6 does not allow to override equals() for value-classes
 
     fun equalsTo(other: Dec) = compareTo(other) == 0
-
-    fun equalsTo(other: Int) = compareTo(Dec(other)) == 0
-    fun equalsTo(other: Long) = compareTo(Dec(other)) == 0
-    fun equalsTo(other: Double) = compareTo(Dec(other)) == 0
-    fun equalsTo(other: BigDecimal) = compareTo(Dec(other)) == 0
+    fun equalsTo(other: Int) = equalsTo(Dec(other))
+    fun equalsTo(other: Long) = equalsTo(Dec(other))
+    fun equalsTo(other: Double) = equalsTo(Dec(other))
+    fun equalsTo(other: BigDecimal) = equalsTo(Dec(other))
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -107,6 +106,7 @@ value class Dec(
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
     operator fun unaryMinus(): Dec = Dec(decimal.negate())
+    operator fun rangeTo(other: Dec) = DecRange(this, other)
 
     /**
      * This method uses [BigDecimal.sqrt], that is available since Java 9. In Java 8 you can use
@@ -136,7 +136,6 @@ value class Dec(
     fun min(other: Long) = min(this, Dec(other))
     fun min(other: Int) = min(this, Dec(other))
     fun min(other: BigDecimal) = min(this, Dec(other))
-    operator fun rangeTo(other: Dec) = DecRange(this, other)
 }
 
 data class DecRange(
@@ -165,7 +164,7 @@ fun Dec.requireEquals(other: Double) = this.requireEquals(Dec(other))
 const val DEFAULT_TOLERANCE = 1E-15
 
 fun Dec.isAlmostEquals(other: Dec, tolerance: Double = DEFAULT_TOLERANCE): Boolean {
-    return (this/other-1.0).abs() <= tolerance
+    return (this/other-1.0).abs() <= tolerance  // TODO
 }
 
 fun Dec.requireAlmostEquals(other: Dec, tolerance: Double = DEFAULT_TOLERANCE) {
