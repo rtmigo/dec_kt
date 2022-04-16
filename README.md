@@ -111,14 +111,15 @@ fun fastest(n: Int): Double {
     var x: Double = 0.0
     for (i in 1..n) {
         x += 0.01
-        // we can reuse x if we are satisfied with an inaccurate 
-        // value in the next step 
+        // we can reuse x if we are satisfied with  
+        // inaccurate decimal value on each step 
     }
     // we also must be sure that the accumulated error 
-    // is much less than the rounding. This can be tricky 
-    // because the size of the error depends on n
+    // is much less than the rounding
     return Precision.round(x, 2)
 }
+
+fun hyperspeed(n: Int) = Precision.round(n*0.01, 2)  // ;)
 ```
 
 ### Reusing is faster than creation
