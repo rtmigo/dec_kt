@@ -90,8 +90,8 @@ value class Dec(
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
-    override fun toString(): String {
-        return if (decimal.scale() == 0)
+    override fun toString(): String =
+        if (decimal.scale() == 0)
             decimal.toPlainString() + ".0"
         else {
             var result = decimal.toPlainString().dropLastWhile { it == '0' }
@@ -99,7 +99,6 @@ value class Dec(
                 result += "0"
             result
         }
-    }
 
     fun toDouble() = this.decimal.toDouble()
 
