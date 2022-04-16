@@ -5,12 +5,14 @@
 
 package io.github.rtmigo.dec
 
+import io.kotest.matchers.booleans.*
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.*
 import org.junit.jupiter.api.Assertions.assertTrue
 import java.math.BigDecimal
 import kotlin.random.Random
 
+//fun mustBeTrue(bl)
 
 internal class DecTest {
 
@@ -31,13 +33,29 @@ internal class DecTest {
         }
     }
 
+//    fun uniCompare(numValue: String, block:  (Dec, Any)->Boolean) {
+//        block()
+//        numValue.toLong()
+//
+//    }
+
+
+
+
     @Test
     fun compare() {
         assertTrue(Dec(1.0) == Dec(1.0))
         assertTrue(Dec("1.0").compareTo(Dec("1.000")) == 0)
 
         assertTrue(Dec("2.0") > Dec("1.55"))
+        assertTrue(Dec("2.0") > 1.55)
+        assertTrue(Dec("2.0") > 1)
+        assertTrue(Dec("2.0") > 1L)
+
         assertTrue(Dec("2.0") < Dec("3.55"))
+        assertTrue(Dec("2.0") < 3.55)
+        assertTrue(Dec("2.0") < 4)
+        assertTrue(Dec("2.0") < 4L)
 
         assertTrue(Dec("2.0") <= Dec("2.00"))
         assertTrue(Dec("2.0") >= Dec("2.00"))
@@ -47,6 +65,9 @@ internal class DecTest {
 
         assertTrue(Dec("2.0") <= Dec(2))
         assertTrue(Dec("2.0") >= Dec(2))
+
+        assertTrue(Dec("2.0") <= Dec(2L))
+        assertTrue(Dec("2.0") >= Dec(2L))
     }
 
     @Test
@@ -200,5 +221,13 @@ internal class DecTest {
     fun sumOf() {
         listOf(Dec(1), Dec(2), Dec(3)).sumOf { it }.requireEquals(6)
         listOf<Dec>().sumOf { it }.requireEquals(0)
+    }
+
+    @Test
+    fun range() {
+
+        (Dec(2) in Dec(1)..Dec(3)).shouldBeTrue()
+        (Dec(7) in Dec(1)..Dec(3)).shouldBeFalse()
+
     }
 }
