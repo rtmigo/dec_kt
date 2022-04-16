@@ -8,7 +8,7 @@ package io.github.rtmigo.dec
 import io.kotest.matchers.booleans.*
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.*
-import org.junit.jupiter.api.Assertions.assertTrue
+import org.junit.jupiter.api.Assertions.*
 import java.math.BigDecimal
 import kotlin.random.Random
 
@@ -48,14 +48,19 @@ internal class DecTest {
         assertTrue(Dec("1.0").compareTo(Dec("1.000")) == 0)
 
         assertTrue(Dec("2.0") > Dec("1.55"))
+        assertTrue(Dec("2.0") > Dec(BigDecimal("1.55")))
         assertTrue(Dec("2.0") > 1.55)
         assertTrue(Dec("2.0") > 1)
         assertTrue(Dec("2.0") > 1L)
 
         assertTrue(Dec("2.0") < Dec("3.55"))
+        assertTrue(Dec("2.0") < Dec(BigDecimal("3.55")))
         assertTrue(Dec("2.0") < 3.55)
         assertTrue(Dec("2.0") < 4)
         assertTrue(Dec("2.0") < 4L)
+
+        assertTrue(Dec("2.0") <= Dec(BigDecimal("2.00")))
+        assertTrue(Dec("2.0") >= Dec(BigDecimal("2.00")))
 
         assertTrue(Dec("2.0") <= Dec("2.00"))
         assertTrue(Dec("2.0") >= Dec("2.00"))
@@ -72,9 +77,18 @@ internal class DecTest {
 
     @Test
     fun valueEquals() {
+
         assertTrue(Dec("2.0").equalsTo(Dec(2)))
+        assertTrue(Dec("2.0").equalsTo(Dec(2L)))
         assertTrue(Dec("2.0").equalsTo(Dec(2.0)))
         assertTrue(Dec("2.0").equalsTo(Dec("2.0000")))
+        assertTrue(Dec("2.0").equalsTo(Dec(BigDecimal("2.0000"))))
+
+        assertFalse(Dec("2.1").equalsTo(Dec(2)))
+        assertFalse(Dec("2.1").equalsTo(Dec(2L)))
+        assertFalse(Dec("2.1").equalsTo(Dec(2.0)))
+        assertFalse(Dec("2.1").equalsTo(Dec("2.0000")))
+        assertFalse(Dec("2.1").equalsTo(Dec(BigDecimal("2.0000"))))
 
         assertTrue(Dec(2).equalsTo(Dec("2.0")))
         assertTrue(Dec(2.0).equalsTo(Dec("2.0")))
@@ -225,9 +239,7 @@ internal class DecTest {
 
     @Test
     fun range() {
-
         (Dec(2) in Dec(1)..Dec(3)).shouldBeTrue()
         (Dec(7) in Dec(1)..Dec(3)).shouldBeFalse()
-
     }
 }
