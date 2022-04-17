@@ -37,6 +37,33 @@ In fact, `Dec` also has a rounding problem. But this happens when you literally
 operate on 16-digit numbers like `2.718281828459045` and some inaccuracy in the
 lower digits is expected.
 
+<details>
+<summary>More horrors of double arithmetic</summary>
+
+
+Let's just sum `0.1` multiple times and compare to the ideal result.
+
+```kotlin
+fun compute(summands: Int): Double {
+    val ideal = summands * 0.1
+    val error = (1..summands).sumOf { 0.1 } - ideal
+    return error
+}
+```
+
+Summands | Error (plain) | Error (scientific)
+----------|------------------|---------------
+10 | -0.000000000000000111 | -1.1102230246251565E-16
+100 | -0.00000000000001954 | -1.9539925233402755E-14
+1,000 | -0.000000000001406875 | -1.4068746168049984E-12
+10,000 | 0.000000000158820512 | 1.588205122970976E-10
+100,000 | 0.0000000188483682 | 1.8848368199542165E-8
+1,000,000 | 0.000001332882675342 | 1.3328826753422618E-6
+10,000,000 | -0.00016102462541312 | -1.610246254131198E-4
+100,000,000 | -0.018870549276471138 | -0.018870549276471138
+1,000,000,000 | -1.2545821815729141 | -1.2545821815729141
+</details>
+
 ## Dec vs BigDecimal
 
 `BigDecimal` fixes oddities in `Double` rounding.
@@ -115,7 +142,7 @@ fun fastest(n: Int): Double {
         // inaccurate decimal value on each step 
     }
     // we also must be sure that the accumulated error 
-    // is much less than the rounding
+    // is less than the rounding
     return Precision.round(x, 2)
 }
 
