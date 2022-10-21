@@ -28,14 +28,15 @@ publishing {
                 description.set("Kotlin wrapper for Java BigDecimal")
                 url.set(github)
 
+                organization {
+                    this.name.set("Revercode")
+                    this.url.set("https://revercode.com")
+                }
+
                 developers {
                     developer {
                         name.set("Artsiom iG")
                         email.set("ortemeo@gmail.com")
-                        organization {
-                            this.name.set("Revercode")
-                            this.url.set("https://revercode.com")
-                        }
                     }
                 }
                 scm {
