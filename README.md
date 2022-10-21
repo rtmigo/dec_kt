@@ -112,7 +112,6 @@ to use `Double` and round it up after every calculation. However, properly done
 rounding can be much slower than just using `Dec`.
 
 
-
 ```kotlin
 import org.apache.commons.math3.util.Precision
 import io.github.rtmigo.dec.*
