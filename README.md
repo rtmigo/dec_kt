@@ -1,10 +1,9 @@
-![Generic badge](https://img.shields.io/badge/maturity-experimental-red.svg)
+[![Maven Central](https://img.shields.io/maven-central/v/io.github.rtmigo/dec.svg)](https://search.maven.org/artifact/io.github.rtmigo/dec)
 ![Generic badge](https://img.shields.io/badge/JVM-11-blue.svg)
-![JaCoCo](https://raw.github.com/rtmigo/dec_kt/dev_updated_by_actions/.github/badges/jacoco.svg)
 
-# io.github.rtmigo : [dec](https://github.com/rtmigo/dec_kt#readme)
+# [dec](https://github.com/rtmigo/dec_kt#readme)
 
-`Dec` is a Kotlin wrapper around the Java `BigDecimal`. With the `Dec`, you
+`Dec` is a Kotlin wrapper for Java `BigDecimal`. With `Dec`, you
 can perform calculations while remaining at a
 predictable [Decimal64](https://en.wikipedia.org/wiki/Decimal64_floating-point_format) precision.
 
@@ -41,27 +40,28 @@ lower digits is expected.
 <summary>More horrors of double arithmetic</summary>
 
 
-Let's just sum `0.1` multiple times and compare to the ideal result.
+Let's sum `0.1` multiple times and compare to the ideal result.
 
 ```kotlin
-fun compute(summands: Int): Double {
+fun difference(summands: Int): Double {
     val ideal = summands * 0.1
-    val error = (1..summands).sumOf { 0.1 } - ideal
-    return error
+    val sum = (1..summands).sumOf { 0.1 } 
+    return sum - ideal
 }
 ```
 
-Summands | Error (plain) | Error (scientific)
-----------|------------------|---------------
-10 | -0.000000000000000111 | -1.1102230246251565E-16
-100 | -0.00000000000001954 | -1.9539925233402755E-14
-1,000 | -0.000000000001406875 | -1.4068746168049984E-12
-10,000 | 0.000000000158820512 | 1.588205122970976E-10
-100,000 | 0.0000000188483682 | 1.8848368199542165E-8
-1,000,000 | 0.000001332882675342 | 1.3328826753422618E-6
-10,000,000 | -0.00016102462541312 | -1.610246254131198E-4
-100,000,000 | -0.018870549276471138 | -0.018870549276471138
-1,000,000,000 | -1.2545821815729141 | -1.2545821815729141
+| Summands      | Difference (plain)    | Difference (scientific) |
+|---------------|-----------------------|-------------------------|
+| 10            | -0.000000000000000111 | -1.1102230246251565E-16 |
+| 100           | -0.00000000000001954  | -1.9539925233402755E-14 |
+| 1,000         | -0.000000000001406875 | -1.4068746168049984E-12 |
+| 10,000        | 0.000000000158820512  | 1.588205122970976E-10   |
+| 100,000       | 0.0000000188483682    | 1.8848368199542165E-8   |
+| 1,000,000     | 0.000001332882675342  | 1.3328826753422618E-6   |
+| 10,000,000    | -0.00016102462541312  | -1.610246254131198E-4   |
+| 100,000,000   | -0.018870549276471138 | -0.018870549276471138   |
+| 1,000,000,000 | -1.2545821815729141   | -1.2545821815729141     |
+
 </details>
 
 ## Dec vs BigDecimal
@@ -110,7 +110,6 @@ BigDecimal("125") + 8  // does not compile in Kotlin
 `Double` with its rounding artifacts is much faster than `Dec`. It's tempting 
 to use `Double` and round it up after every calculation. However, properly done 
 rounding can be much slower than just using `Dec`.
-
 
 
 ```kotlin
@@ -181,22 +180,7 @@ that:
 100.0.toDecBin() - 0.1.toDecBin()  // = 99.90000000000001
 ```
 
-# Install
+# License
 
-#### settings.gradle.kts
-
-```kotlin
-sourceControl {
-    gitRepository(java.net.URI("https://github.com/rtmigo/dec_kt.git")) {
-        producesModule("io.github.rtmigo:dec")
-    }
-}
-```
-
-#### build.gradle.kts
-
-```kotlin
-dependencies {
-    implementation("io.github.rtmigo:dec")
-}
-```
+Copyright © 2022 [Artsiom iG](https://github.com/rtmigo).
+Released under the [ISC License](LICENSE).

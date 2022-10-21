@@ -1,3 +1,9 @@
+/**
+ * SPDX-FileCopyrightText: (c) 2022 Artsiom iG (rtmigo.github.io)
+ * SPDX-License-Identifier: ISC
+ **/
+
+
 package io.github.rtmigo.dec
 
 import io.kotest.matchers.shouldBe
