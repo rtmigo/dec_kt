@@ -1,3 +1,9 @@
+/**
+ * SPDX-FileCopyrightText: (c) 2022 Artsiom iG (rtmigo.github.io)
+ * SPDX-License-Identifier: ISC
+ **/
+
+
 import java.text.*
 import kotlin.math.pow
 

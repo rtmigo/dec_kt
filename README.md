@@ -1,6 +1,5 @@
-![Generic badge](https://img.shields.io/badge/maturity-experimental-red.svg)
 ![Generic badge](https://img.shields.io/badge/JVM-11-blue.svg)
-![JaCoCo](https://raw.github.com/rtmigo/dec_kt/dev_updated_by_actions/.github/badges/jacoco.svg)
+[![Maven Central](https://img.shields.io/maven-central/v/io.github.rtmigo/dec.svg)](https://search.maven.org/artifact/io.github.rtmigo/dec)
 
 # io.github.rtmigo : [dec](https://github.com/rtmigo/dec_kt#readme)
 
@@ -41,7 +40,7 @@ lower digits is expected.
 <summary>More horrors of double arithmetic</summary>
 
 
-Let's just sum `0.1` multiple times and compare to the ideal result.
+Let's sum `0.1` multiple times and compare to the ideal result.
 
 ```kotlin
 fun difference(summands: Int): Double {
@@ -51,17 +50,18 @@ fun difference(summands: Int): Double {
 }
 ```
 
-Summands      | Difference (plain)    | Difference (scientific)
---------------|-----------------------|-------------------------
-10            | -0.000000000000000111 | -1.1102230246251565E-16
-100           | -0.00000000000001954  | -1.9539925233402755E-14
-1,000         | -0.000000000001406875 | -1.4068746168049984E-12
-10,000        | 0.000000000158820512  | 1.588205122970976E-10
-100,000       | 0.0000000188483682    | 1.8848368199542165E-8
-1,000,000     | 0.000001332882675342  | 1.3328826753422618E-6
-10,000,000    | -0.00016102462541312  | -1.610246254131198E-4
-100,000,000   | -0.018870549276471138 | -0.018870549276471138
-1,000,000,000 | -1.2545821815729141   | -1.2545821815729141
+| Summands      | Difference (plain)    | Difference (scientific) |
+|---------------|-----------------------|-------------------------|
+| 10            | -0.000000000000000111 | -1.1102230246251565E-16 |
+| 100           | -0.00000000000001954  | -1.9539925233402755E-14 |
+| 1,000         | -0.000000000001406875 | -1.4068746168049984E-12 |
+| 10,000        | 0.000000000158820512  | 1.588205122970976E-10   |
+| 100,000       | 0.0000000188483682    | 1.8848368199542165E-8   |
+| 1,000,000     | 0.000001332882675342  | 1.3328826753422618E-6   |
+| 10,000,000    | -0.00016102462541312  | -1.610246254131198E-4   |
+| 100,000,000   | -0.018870549276471138 | -0.018870549276471138   |
+| 1,000,000,000 | -1.2545821815729141   | -1.2545821815729141     |
+
 </details>
 
 ## Dec vs BigDecimal

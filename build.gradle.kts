@@ -6,6 +6,11 @@ plugins {
     id("org.jetbrains.kotlin.plugin.serialization") version "1.6.20"
 }
 
+java {
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
+}
+
 group = "io.github.rtmigo"
 version = "0.0.0+1"
 
@@ -22,12 +27,12 @@ repositories {
 
 dependencies {
     implementation(kotlin("stdlib-jdk8"))
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.2")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.1")
 
     testImplementation(kotlin("test"))
-    testImplementation("org.junit.jupiter:junit-jupiter-api:5.8.2")
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.8.2")
-    testImplementation("io.kotest:kotest-assertions-core:5.2.2")
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.9.0")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.9.0")
+    testImplementation("io.kotest:kotest-assertions-core:5.5.1")
 
 }
 
@@ -50,7 +55,7 @@ tasks.test {
 
 tasks.register("updateReadmeVersion") {
     doFirst {
-        // найдем что-то вроде "io.github.rtmigo:repr:0.0.1"
+        // найдем что-то вроде "io.github.rtmigo:dec:0.0.1"
         // и поменяем на актуальную версию
         val readmeFile = project.rootDir.resolve("README.md")
         val prefixToFind = "io.github.rtmigo:dec:"

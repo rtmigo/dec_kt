@@ -1,6 +1,23 @@
 #!/usr/bin/env sh
 
 #
+# SPDX-FileCopyrightText: (c) 2022 Artsiom iG (rtmigo.github.io)
+# SPDX-License-Identifier: ISC
+#
+
+
+
+
+
+
+
+
+
+
+
+
+
+#
 # Copyright 2015 the original author or authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
