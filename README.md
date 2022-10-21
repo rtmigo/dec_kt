@@ -3,7 +3,7 @@
 
 # [dec](https://github.com/rtmigo/dec_kt#readme)
 
-`Dec` is a Kotlin wrapper around the Java `BigDecimal`. With the `Dec`, you
+`Dec` is a Kotlin wrapper for Java `BigDecimal`. With `Dec`, you
 can perform calculations while remaining at a
 predictable [Decimal64](https://en.wikipedia.org/wiki/Decimal64_floating-point_format) precision.
 
