@@ -1,7 +1,7 @@
-![Generic badge](https://img.shields.io/badge/JVM-11-blue.svg)
 [![Maven Central](https://img.shields.io/maven-central/v/io.github.rtmigo/dec.svg)](https://search.maven.org/artifact/io.github.rtmigo/dec)
+![Generic badge](https://img.shields.io/badge/JVM-11-blue.svg)
 
-# io.github.rtmigo : [dec](https://github.com/rtmigo/dec_kt#readme)
+# [dec](https://github.com/rtmigo/dec_kt#readme)
 
 `Dec` is a Kotlin wrapper around the Java `BigDecimal`. With the `Dec`, you
 can perform calculations while remaining at a
@@ -181,22 +181,7 @@ that:
 100.0.toDecBin() - 0.1.toDecBin()  // = 99.90000000000001
 ```
 
-# Install
+# License
 
-#### settings.gradle.kts
-
-```kotlin
-sourceControl {
-    gitRepository(java.net.URI("https://github.com/rtmigo/dec_kt.git")) {
-        producesModule("io.github.rtmigo:dec")
-    }
-}
-```
-
-#### build.gradle.kts
-
-```kotlin
-dependencies {
-    implementation("io.github.rtmigo:dec")
-}
-```
+Copyright © 2022 [Artsiom iG](https://github.com/rtmigo).
+Released under the [ISC License](LICENSE).
