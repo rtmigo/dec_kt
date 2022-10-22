@@ -69,13 +69,7 @@ dependencies {
     testImplementation("io.kotest:kotest-assertions-core:5.5.1")
 }
 
-kotlin {
-    sourceSets {
-        val main by getting
-        val test by getting
-//        val experiment by getting
-    }
-}
+
 
 tasks.jacocoTestReport {
     dependsOn(tasks.test) // tests are required to run before generating JaCoCo report
@@ -111,16 +105,4 @@ tasks.jacocoTestReport {
     }
 }
 
-tasks.register<Jar>("uberJar") {
-    archiveClassifier.set("uber")
-    duplicatesStrategy = org.gradle.api.file.DuplicatesStrategy.INCLUDE
 
-    from(sourceSets.main.get().output)
-
-    dependsOn(configurations.runtimeClasspath)
-    from({
-             configurations.runtimeClasspath.get()
-                 .filter { it.name.endsWith("jar") }
-                 .map { zipTree(it) }
-         })
-}
