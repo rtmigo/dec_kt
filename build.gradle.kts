@@ -15,7 +15,7 @@ java {
 }
 
 group = "io.github.rtmigo"
-version = "0.1.0" // -SNAPSHOT
+version = "0.1.1" // -SNAPSHOT
 
 publishing {
     publications {
@@ -28,10 +28,10 @@ publishing {
                 description.set("Kotlin wrapper for Java BigDecimal")
                 url.set(github)
 
-                organization {
-                    this.name.set("Revercode")
-                    this.url.set("https://revercode.com")
-                }
+//                organization {
+//                    this.name.set("Revercode")
+//                    this.url.set("https://revercode.com")
+//                }
 
                 developers {
                     developer {
@@ -69,13 +69,7 @@ dependencies {
     testImplementation("io.kotest:kotest-assertions-core:5.5.1")
 }
 
-kotlin {
-    sourceSets {
-        val main by getting
-        val test by getting
-//        val experiment by getting
-    }
-}
+
 
 tasks.jacocoTestReport {
     dependsOn(tasks.test) // tests are required to run before generating JaCoCo report
@@ -111,16 +105,4 @@ tasks.jacocoTestReport {
     }
 }
 
-tasks.register<Jar>("uberJar") {
-    archiveClassifier.set("uber")
-    duplicatesStrategy = org.gradle.api.file.DuplicatesStrategy.INCLUDE
 
-    from(sourceSets.main.get().output)
-
-    dependsOn(configurations.runtimeClasspath)
-    from({
-             configurations.runtimeClasspath.get()
-                 .filter { it.name.endsWith("jar") }
-                 .map { zipTree(it) }
-         })
-}
