@@ -9,7 +9,7 @@ import kotlinx.serialization.*
 import java.math.*
 import kotlin.math.pow
 
-/** Wrapper for [BigDecimal]. */
+/** Wrapper for [BigDecimal] fixed to [MathContext.DECIMAL64]. */
 @Serializable
 @JvmInline
 value class Dec(

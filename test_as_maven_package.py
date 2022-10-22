@@ -30,7 +30,7 @@ def test_package(maven_url: str, ver: str):
                 # kotlin code that imports and uses the library
                 "src/main/kotlin/Main.kt": """
                 
-                    import io.github.rtmigo.dec.*
+                    import io.github.rtmigo.dec.Dec
                 
                     fun main() {
                         println(Dec(12.3)+Dec(32.1))
