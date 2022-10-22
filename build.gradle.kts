@@ -15,7 +15,7 @@ java {
 }
 
 group = "io.github.rtmigo"
-version = "0.1.1" // -SNAPSHOT
+version = "0.1.2" // -SNAPSHOT
 
 publishing {
     publications {
@@ -28,10 +28,10 @@ publishing {
                 description.set("Kotlin wrapper for Java BigDecimal")
                 url.set(github)
 
-//                organization {
-//                    this.name.set("Revercode")
-//                    this.url.set("https://revercode.com")
-//                }
+                organization {
+                    this.name.set("Revercode")
+                    this.url.set("https://revercode.com")
+                }
 
                 developers {
                     developer {
