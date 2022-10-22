@@ -3,19 +3,44 @@
 
 # [dec](https://github.com/rtmigo/dec_kt#readme)
 
-`Dec` object represents a 64-bit decimal floating-point number. 
+`Dec` object represents a 64-bit decimal floating-point number.
 
 - Unlike `Double`, `Dec` has no binary rounding artifacts.
 
-- Unlike `BigDecimal`, `Dec` has a fixed [decimal64](https://en.wikipedia.org/wiki/Decimal64_floating-point_format) 
-precision.
-
-
+- Unlike `BigDecimal`, `Dec` has a
+  fixed [decimal64](https://en.wikipedia.org/wiki/Decimal64_floating-point_format)
+  precision.
 
 These two qualities make `Dec` more predictable in arithmetic.
 
 `Dec` is a thin Kotlin wrapper for Java `BigDecimal`.
 
+## Install [![Maven Central](https://img.shields.io/maven-central/v/io.github.rtmigo/dec.svg)](https://search.maven.org/artifact/io.github.rtmigo/dec)
+
+```kotlin
+// build.gradle.kts
+
+dependencies {
+    implementation("io.github.rtmigo:dec:X.X.X")
+    // replace X.X.X with actual version
+}
+```
+
+Find the latest version and instructions for other build systems
+at [Maven Central](https://search.maven.org/artifact/io.github.rtmigo/dec).
+
+## Basic use
+
+```kotlin
+import io.github.rtmigo.dec.Dec
+
+fun main() {
+    val pi = Dec("3.14159265359")
+    val r = Dec(5)
+
+    println(pi * (r * r))
+}
+```
 
 ## Dec vs Double
 
@@ -30,7 +55,7 @@ in a different order, give different results.
 
 ```kotlin
 (0.1 + 0.2) - (0.1 + 0.2)  // = 0.0
- 0.1 + 0.2  -  0.1 - 0.2   // = 2.7755575615628914e-17
+0.1 + 0.2 - 0.1 - 0.2   // = 2.7755575615628914e-17
 ```
 
 `Dec` behaves more predictably.
@@ -54,7 +79,7 @@ Let's sum `0.1` multiple times and compare to the ideal result.
 ```kotlin
 fun difference(summands: Int): Double {
     val ideal = summands * 0.1
-    val sum = (1..summands).sumOf { 0.1 } 
+    val sum = (1..summands).sumOf { 0.1 }
     return sum - ideal
 }
 ```
@@ -116,10 +141,9 @@ BigDecimal("125") + 8  // does not compile in Kotlin
 
 ### Dec is faster than rounding Double
 
-`Double` with its rounding artifacts is much faster than `Dec`. It's tempting 
-to use `Double` and round it up after every calculation. However, properly done 
+`Double` with its rounding artifacts is much faster than `Dec`. It's tempting
+to use `Double` and round it up after every calculation. However, properly done
 rounding can be much slower than just using `Dec`.
-
 
 ```kotlin
 import org.apache.commons.math3.util.Precision
@@ -154,7 +178,7 @@ fun fastest(n: Int): Double {
     return Precision.round(x, 2)
 }
 
-fun hyperspeed(n: Int) = Precision.round(n*0.01, 2)  // ;)
+fun hyperspeed(n: Int) = Precision.round(n * 0.01, 2)  // ;)
 ```
 
 ### Reusing is faster than creation
