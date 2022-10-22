@@ -3,9 +3,16 @@
 
 # [dec](https://github.com/rtmigo/dec_kt#readme)
 
-`Dec` is a Kotlin wrapper for Java `BigDecimal`. With `Dec`, you
-can perform calculations while remaining at a
-predictable [Decimal64](https://en.wikipedia.org/wiki/Decimal64_floating-point_format) precision.
+`Dec` object represents a 64-bit decimal floating-point number. 
+
+- Unlike `BigDecimal`, `Dec` has a fixed [decimal64](https://en.wikipedia.org/wiki/Decimal64_floating-point_format) 
+precision.
+
+- Unlike `Double`, `Dec` has no binary rounding artifacts.
+
+These two qualities make `Dec` more predictable in arithmetic.
+
+`Dec` is a thin Kotlin wrapper for Java `BigDecimal`.
 
 
 ## Dec vs Double
