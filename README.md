@@ -5,10 +5,12 @@
 
 `Dec` object represents a 64-bit decimal floating-point number. 
 
+- Unlike `Double`, `Dec` has no binary rounding artifacts.
+
 - Unlike `BigDecimal`, `Dec` has a fixed [decimal64](https://en.wikipedia.org/wiki/Decimal64_floating-point_format) 
 precision.
 
-- Unlike `Double`, `Dec` has no binary rounding artifacts.
+
 
 These two qualities make `Dec` more predictable in arithmetic.
 
