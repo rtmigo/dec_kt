@@ -226,8 +226,9 @@ jobs:
           cache: gradle
       - name: Set up Mavence
         run: | 
+          # HACK!
           wget -O ~/mavence.jar \
-            https://github.com/rtmigo/mavence/releases/latest/download/mavence.jar
+            https://github.com/rtmigo/mavence/releases/download/0.4.3/mavence.jar
           java -jar ~/mavence.jar --version
       - name: Publish to Maven Central
         run: |
