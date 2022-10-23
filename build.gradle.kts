@@ -1,9 +1,9 @@
 plugins {
-    kotlin("jvm") version "1.6.20"
+    kotlin("jvm") version "1.7.20"
     id("java-library")
     jacoco
     java
-    id("org.jetbrains.kotlin.plugin.serialization") version "1.6.20"
+    id("org.jetbrains.kotlin.plugin.serialization") version "1.7.20"
     id("maven-publish")
 }
 
@@ -15,13 +15,15 @@ java {
 }
 
 group = "io.github.rtmigo"
-version = "0.1.3" // -SNAPSHOT
+version = "0.1.4" // -SNAPSHOT
 
 publishing {
     publications {
         create<MavenPublication>("dec") {
             from(components["java"])
             pom {
+                this.properties.put("java.version", "11")
+
                 val github = "https://github.com/rtmigo/dec_kt"
 
                 name.set("dec")
@@ -69,8 +71,6 @@ dependencies {
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.9.0")
     testImplementation("io.kotest:kotest-assertions-core:5.5.1")
 }
-
-
 
 tasks.jacocoTestReport {
     dependsOn(tasks.test) // tests are required to run before generating JaCoCo report
