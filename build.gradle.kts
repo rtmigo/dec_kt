@@ -15,7 +15,7 @@ java {
 }
 
 group = "io.github.rtmigo"
-version = "0.1.2" // -SNAPSHOT
+version = "0.1.3" // -SNAPSHOT
 
 publishing {
     publications {
@@ -24,8 +24,9 @@ publishing {
             pom {
                 val github = "https://github.com/rtmigo/dec_kt"
 
-                name.set("repr")
-                description.set("Kotlin wrapper for Java BigDecimal")
+                name.set("dec")
+                description.set("64-bit decimal floating-point number. " +
+                                    "Kotlin wrapper for Java BigDecimal.")
                 url.set(github)
 
                 organization {
@@ -104,5 +105,3 @@ tasks.jacocoTestReport {
         csv.required.set(true)
     }
 }
-
-
