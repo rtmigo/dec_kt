@@ -15,7 +15,7 @@ java {
 }
 
 group = "io.github.rtmigo"
-version = "0.1.7" // -SNAPSHOT
+version = "0.1.8" // -SNAPSHOT
 
 publishing {
     publications {
