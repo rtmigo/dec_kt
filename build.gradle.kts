@@ -15,16 +15,16 @@ java {
 }
 
 group = "io.github.rtmigo"
-version = "0.1.5" // -SNAPSHOT
+version = "0.1.6" // -SNAPSHOT
 
 publishing {
     publications {
         create<MavenPublication>("dec") {
             from(components["java"])
             pom {
-                //this.properties.put("java.version", "11")
-                this.properties.put("maven.compiler.target", "11")
-                this.properties.put("maven.compiler.source", "11")
+                this.properties.put("java.version", "11")
+                //this.properties.put("maven.compiler.target", "11")
+                //this.properties.put("maven.compiler.source", "11")
 
                 val github = "https://github.com/rtmigo/dec_kt"
 
